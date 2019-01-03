@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, StatusBar, Animated } from 'react-native';
+import { StyleSheet, View, StatusBar, Animated, Easing } from 'react-native';
 import { MAIN_COLOR } from '../../utils/constants';
 
 export default class SplashComponent extends Component{
@@ -9,6 +9,7 @@ export default class SplashComponent extends Component{
     componentDidMount(){
         Animated.timing(this.animatedValue, {
             toValue: 1,
+            easing: Easing.elastic(1),
             duration: 2000
         }).start()
     }
