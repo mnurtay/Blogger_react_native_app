@@ -11,13 +11,13 @@ export default class AuthLoading extends Component{
         }
     }
 
-    // componentWillMount() {
-    //     setTimeout(() => {
-    //         this.setState({
-    //             view: <View><Text>Auth</Text></View>
-    //         })
-    //     }, 1500)
-    // }
+    componentWillMount() {
+        setTimeout(() => {
+            this.setState({
+                view: <View><Text>Auth</Text></View>
+            })
+        }, 2500)
+    }
 
     render(){
         return(

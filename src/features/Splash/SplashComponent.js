@@ -1,19 +1,46 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, StatusBar } from 'react-native';
+import { StyleSheet, View, Text, StatusBar, Animated } from 'react-native';
 import { MAIN_COLOR } from '../../utils/constants';
 
 export default class SplashComponent extends Component{
+    componentWillMount(){
+        this.animatedValue = new Animated.Value(0)
+    }
+    componentDidMount(){
+        Animated.timing(this.animatedValue, {
+            toValue: 1,
+            duration: 2000
+        }).start()
+    }
     render(){
+        const interpolateRotation = this.animatedValue.interpolate({
+            inputRange: [0, 1],
+            outputRange: ['45deg', '405deg']
+        })
+        const animatedStyle = {
+            transform: [
+                { rotate: interpolateRotation }
+            ]
+        }
+        const interpolateRotation2 = this.animatedValue.interpolate({
+            inputRange: [0, 1],
+            outputRange: ['-45deg', '-405deg']
+        })
+        const animatedStyle2 = {
+            transform: [
+                { rotate: interpolateRotation2 }
+            ]
+        }
         return(
             <View style={styles.container}>
                 <StatusBar hidden={true}/>
-                <View style={styles.diamond}>
+                <Animated.View style={[styles.diamond, animatedStyle]}>
                     <View>
-                        <Text style={styles.textStyle}>
+                        <Animated.Text style={[styles.textStyle, animatedStyle2]}>
                             Blogger App
-                        </Text>
+                        </Animated.Text>
                     </View>
-                </View>
+                </Animated.View>
             </View>
         )
     }
