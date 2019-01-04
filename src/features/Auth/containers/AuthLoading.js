@@ -1,27 +1,26 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { AsyncStorage, View } from 'react-native';
 import SplashComponent from '../../Splash/SplashComponent'
 
 export default class AuthLoading extends Component{
-
     constructor(props){
         super(props)
         this.state = {
-            view: <SplashComponent />
+            view: <SplashComponent />,
+            load: false
         }
     }
 
     componentWillMount() {
-        setTimeout(() => {
-            this.setState({
-                view: <View><Text>Auth</Text></View>
+        setTimeout( async () => {
+            userLogin = await AsyncStorage.getItem('userLogin')
+            this.setState( prevState => {
+                view: this.props.navigation.navigate(userLogin ? 'app' : 'auth')
             })
         }, 2500)
     }
 
     render(){
-        return(
-            this.state.view
-        )
+        return this.state.view
     }
 }

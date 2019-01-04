@@ -59,9 +59,9 @@ const styles = StyleSheet.create({
         height: 270,
         borderRadius: 12,
         backgroundColor: MAIN_COLOR,
-        transform: [
-            {rotate: '45deg'}
-        ],
+        // transform: [
+        //     {rotate: '45deg'}
+        // ],
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -69,8 +69,8 @@ const styles = StyleSheet.create({
         fontFamily: 'happyMonkey',
         color: '#fff',
         fontSize: 40,
-        transform: [
-            {rotate: '-45deg'}
-        ],
+        // transform: [
+        //     {rotate: '-45deg'}
+        // ],
     }
 })
