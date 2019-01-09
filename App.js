@@ -15,6 +15,7 @@ export default class App extends React.Component {
       'charmBold': require('./assets/fonts/Charm-Bold.ttf'),
       'charm': require('./assets/fonts/Charm-Regular.ttf'),
       'happyMonkey': require('./assets/fonts/HappyMonkey-Regular.ttf'),
+      'lobster': require('./assets/fonts/Lobster-Regular.ttf')
     })
     this.setState({ fontLoaded: true })
   }

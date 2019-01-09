@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, StatusBar, Animated, Easing } from 'react-native';
-import { MAIN_COLOR } from '../../utils/constants';
+import { StyleSheet, View, StatusBar, Animated, Easing, PixelRatio } from 'react-native';
+import { MAIN_COLOR, w, h } from '../../utils/constants';
 
 export default class SplashComponent extends Component{
     componentWillMount(){
@@ -34,7 +34,7 @@ export default class SplashComponent extends Component{
         }
         return(
             <View style={styles.container}>
-                <StatusBar hidden={true}/>
+                <StatusBar hidden={true} animated={false}/>
                 <Animated.View style={[styles.diamond, animatedStyle]}>
                     <View>
                         <Animated.Text style={[styles.textStyle, animatedStyle2]}>
@@ -55,22 +55,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     diamond: {
-        width: 270,
-        height: 270,
-        borderRadius: 12,
+        width: w*.67,
+        height: w*.67,
+        borderRadius: PixelRatio.getPixelSizeForLayoutSize(5),
         backgroundColor: MAIN_COLOR,
-        // transform: [
-        //     {rotate: '45deg'}
-        // ],
         alignItems: 'center',
         justifyContent: 'center',
     },
     textStyle: {
-        fontFamily: 'happyMonkey',
+        fontFamily: 'lobster',
         color: '#fff',
-        fontSize: 40,
-        // transform: [
-        //     {rotate: '-45deg'}
-        // ],
+        fontSize: PixelRatio.getPixelSizeForLayoutSize(16),
     }
 })
