@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Text, PixelRatio, KeyboardAvoidingView, TextInput } from 'react-native'
 import { STATUSBAR_COLOR, MAIN_COLOR, w, h } from '../../../utils/constants'
 import { Constants } from 'expo'
-import { Button, Divider } from 'react-native-elements'
+import { Button } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 
 export default class SigninComponent extends Component{
@@ -91,14 +91,24 @@ export default class SigninComponent extends Component{
                         />
                     <View style={{flexDirection:'row', marginTop:h*.03}}>
                         <Text style={{color:'#808080',fontSize:PixelRatio.getPixelSizeForLayoutSize(4.7)}}>
-                            Забыли пароль?
+                            Забыли пароль? 
                         </Text>
                         <Text style={{fontWeight:'500',fontSize:PixelRatio.getPixelSizeForLayoutSize(4.7)}}
                             onPress={()=>console.log('forgotten')}>
                             Помощь со входом в систему.
                         </Text>
                     </View>
-                    
+                    <View style={styles.register1}>
+                        <View style={styles.register2}>
+                            <Text style={{color:'#808080',fontSize:PixelRatio.getPixelSizeForLayoutSize(4.9)}}>
+                                Еще нет аккаунта?
+                            </Text>
+                            <Text style={{fontWeight:'500',fontSize:PixelRatio.getPixelSizeForLayoutSize(4.9)}}
+                                onPress={()=>console.log('registered')}>
+                                Зарегистрируйтесь.
+                            </Text>
+                        </View>
+                    </View>
                 </View>
             </View>
         )
@@ -142,4 +152,15 @@ const styles = StyleSheet.create({
         borderRadius: PixelRatio.getPixelSizeForLayoutSize(3),
         marginTop: h*.03
     },
+    register1: {
+        width: w,
+        borderTopWidth: 1,
+        borderTopColor: '#D3D3D3',
+        alignItems: 'center',
+        marginTop: h*.27
+    },
+    register2:{
+        flexDirection:'row',
+        marginTop: h*.015
+    }
 })
