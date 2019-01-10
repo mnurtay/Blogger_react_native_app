@@ -7,7 +7,7 @@ export default class SigninContainer extends Component{
     }
     render(){
         return(
-            <SigninComponent />
+            <SigninComponent navigation={this.props.navigation}/>
         )
     }
 }

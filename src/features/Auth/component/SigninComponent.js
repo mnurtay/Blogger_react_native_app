@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, PixelRatio, KeyboardAvoidingView, TextInput } from 'react-native'
+import { View, StyleSheet, Text, PixelRatio, KeyboardAvoidingView, TextInput, BackHandler } from 'react-native'
 import { STATUSBAR_COLOR, MAIN_COLOR, w, h } from '../../../utils/constants'
 import { Constants } from 'expo'
-import { Button } from 'react-native-elements'
+import { Button, Overlay } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 
 export default class SigninComponent extends Component{
@@ -14,6 +14,8 @@ export default class SigninComponent extends Component{
 
             inputColor1: "#D3D3D3",
             inputColor2: "#D3D3D3",
+
+            overlayVisible: true,
         }
     }
 
@@ -41,6 +43,16 @@ export default class SigninComponent extends Component{
         }
     }
 
+    componentDidMount(){
+        BackHandler.addEventListener('closeOverlay', ()=>{
+            if(this.state.overlayVisible){
+                this.setState({ overlayVisible: false })
+                return true
+            }
+            return false
+        })
+    }
+
     render(){
         btn_disabled = (this.state.login!='') && (this.state.password!='') ? false : true
         btn_style = !btn_disabled ? styles.login_btn_style : [styles.login_btn_style,{opacity:0.65}]
@@ -58,8 +70,19 @@ export default class SigninComponent extends Component{
                                         color='#808080'/> }
                             buttonStyle={styles.lang_button}
                             containerStyle={{}}
-                            titleStyle={{color:'#808080', fontSize:PixelRatio.getPixelSizeForLayoutSize(5)}}/>
+                            titleStyle={{color:'#808080', fontSize:PixelRatio.getPixelSizeForLayoutSize(5)}}
+                            onPress={()=>this.setState({overlayVisible: true})}/>
                     </View>
+                    <Overlay
+                    isVisible={this.state.overlayVisible}
+                    containerStyle={{zIndex: 1000, top:-h*.02}}
+                    onBackdropPress={()=>{ this.setState({overlayVisible: false}) }}
+                    width={w*.8} height={h*.9}
+                    borderRadius={PixelRatio.getPixelSizeForLayoutSize(3)}>
+                        <View style={{alignItems:'center'}}>
+                            <Text>SELECT LANGUAGE</Text>
+                        </View>
+                    </Overlay>
                     <KeyboardAvoidingView behavior="position">
                         <View style={styles.title_container}>
                             <Text style={styles.title_style}>
@@ -104,7 +127,7 @@ export default class SigninComponent extends Component{
                                 Еще нет аккаунта?
                             </Text>
                             <Text style={{fontWeight:'500',fontSize:PixelRatio.getPixelSizeForLayoutSize(4.9)}}
-                                onPress={()=>console.log('registered')}>
+                                onPress={()=>this.props.navigation.navigate('signup')}>
                                 Зарегистрируйтесь.
                             </Text>
                         </View>
