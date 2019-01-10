@@ -15,7 +15,7 @@ export default class SigninComponent extends Component{
             inputColor1: "#D3D3D3",
             inputColor2: "#D3D3D3",
 
-            overlayVisible: true,
+            overlayVisible: false,
         }
     }
 
@@ -40,6 +40,12 @@ export default class SigninComponent extends Component{
             this.setState({
                 inputColor2: "#D3D3D3"
             })
+        }
+    }
+
+    _onLogin = () => {
+        if((this.state.login!='') && (this.state.password!='')){
+            this.props.onLogin(this.state.login, this.state.password)
         }
     }
 
@@ -103,7 +109,8 @@ export default class SigninComponent extends Component{
                             style={[styles.input_style, {borderColor:this.state.inputColor2}]}
                             onFocus={ () => this._onFocus(2) }
                             onBlur={ () => this._onBlur(2) }
-                            ref={(ref) => { this.SecondInput = ref }}/>
+                            ref={(ref) => { this.SecondInput = ref }}
+                            onSubmitEditing={this._onLogin}/>
                     </KeyboardAvoidingView>
                     <Button
                         clear
@@ -111,6 +118,7 @@ export default class SigninComponent extends Component{
                         buttonStyle={ styles.login_btn }
                         containerStyle={ btn_style }
                         disabled={ btn_disabled }
+                        onPress={this._onLogin}
                         />
                     <View style={{flexDirection:'row', marginTop:h*.03}}>
                         <Text style={{color:'#808080',fontSize:PixelRatio.getPixelSizeForLayoutSize(4.7)}}>

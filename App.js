@@ -3,6 +3,14 @@ import { View } from 'react-native';
 import Router from './src/navigation'
 import { Font } from 'expo'
 
+import Reducers from './src/reducers'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import { thunk } from 'redux-thunk'
+
+const middleware = applyMiddleware(thunk)
+const store = createStore(Reducers)
+
 export default class App extends React.Component {
   constructor(props){
     super(props)
@@ -22,13 +30,15 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={{ flex:1 }}>
-        {
-          this.state.fontLoaded ? (
-            <Router />
-          ) : null
-        }
-      </View>
+      <Provider store={store}>
+        <View style={{ flex:1 }}>
+          {
+            this.state.fontLoaded ? (
+              <Router />
+            ) : null
+          }
+        </View>
+      </Provider>
     );
   }
 }
